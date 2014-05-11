@@ -980,12 +980,10 @@ public abstract class BaseGenericObjectPool<T> {
          */
         @Override
         public void run() {
-            ClassLoader savedClassLoader =
-                    Thread.currentThread().getContextClassLoader();
+            ClassLoader savedClassLoader = Thread.currentThread().getContextClassLoader();
             try {
                 // Set the class loader for the factory
-                Thread.currentThread().setContextClassLoader(
-                        factoryClassLoader);
+                Thread.currentThread().setContextClassLoader(factoryClassLoader);
 
                 // Evict from the pool
                 try {

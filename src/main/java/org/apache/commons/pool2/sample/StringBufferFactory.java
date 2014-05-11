@@ -7,8 +7,7 @@ import org.apache.commons.pool2.impl.DefaultPooledObject;
 /**
  * Example PooledObjectFactory for pooled StringBuffers.
  */
-public class StringBufferFactory
-        extends BasePooledObjectFactory<StringBuffer> {
+public class StringBufferFactory extends BasePooledObjectFactory<StringBuffer> {
 
     @Override
     public StringBuffer create() {

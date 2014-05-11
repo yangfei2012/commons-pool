@@ -163,8 +163,7 @@ public class DefaultPooledObject<T> implements PooledObject<T> {
     }
 
     @Override
-    public synchronized boolean endEvictionTest(
-            Deque<PooledObject<T>> idleQueue) {
+    public synchronized boolean endEvictionTest(Deque<PooledObject<T>> idleQueue) {
         if (state == PooledObjectState.EVICTION) {
             state = PooledObjectState.IDLE;
             return true;
