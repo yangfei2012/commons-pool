@@ -125,7 +125,7 @@ public abstract class BaseGenericObjectPool<T> {
      * @param jmxNamePrefix Prefix to be used for JMX name for the new pool
      */
     public BaseGenericObjectPool(BaseObjectPoolConfig config,
-            String jmxNameBase, String jmxNamePrefix) {
+                                 String jmxNameBase, String jmxNamePrefix) {
         if (config.getJmxEnabled()) {
             this.oname = jmxRegister(config, jmxNameBase, jmxNamePrefix);
         } else {

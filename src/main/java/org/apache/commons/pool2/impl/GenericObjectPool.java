@@ -101,8 +101,7 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
      *                  the configuration object will not be reflected in the
      *                  pool.
      */
-    public GenericObjectPool(PooledObjectFactory<T> factory,
-            GenericObjectPoolConfig config) {
+    public GenericObjectPool(PooledObjectFactory<T> factory, GenericObjectPoolConfig config) {
 
         super(config, ONAME_BASE, config.getJmxNamePrefix());
 
@@ -1102,8 +1101,7 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
         new LinkedBlockingDeque<PooledObject<T>>();
 
     // JMX specific attributes
-    private static final String ONAME_BASE =
-        "org.apache.commons.pool2:type=GenericObjectPool,name=";
+    private static final String ONAME_BASE = "org.apache.commons.pool2:type=GenericObjectPool,name=";
 
     // Additional configuration properties for abandoned object tracking
     private volatile AbandonedConfig abandonedConfig = null;
