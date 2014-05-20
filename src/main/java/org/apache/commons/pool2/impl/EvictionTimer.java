@@ -60,13 +60,14 @@ class EvictionTimer {
      */
     static synchronized void schedule(TimerTask task, long delay, long period) {
         if (null == _timer) {
-            // Force the new Timer thread to be created with a context class
-            // loader set to the class loader that loaded this library
-            ClassLoader ccl = AccessController.doPrivileged(
-                    new PrivilegedGetTccl());
+            // TODO: 这里通过临时重置ClassLoader，是的所有新创建的Timer线程的class loader为EvictionTimer的class loader
+            // 从而可以共享操作权限之类的东西？
+            // Force the new Timer thread to be created with a
+            // context class loader set to the class loader that loaded this library
+            ClassLoader ccl = AccessController.doPrivileged(new PrivilegedGetTccl());
             try {
-                AccessController.doPrivileged(new PrivilegedSetTccl(
-                        EvictionTimer.class.getClassLoader()));
+                AccessController.doPrivileged(
+                        new PrivilegedSetTccl(EvictionTimer.class.getClassLoader()));
                 _timer = new Timer("commons-pool-EvictionTimer", true);
             } finally {
                 AccessController.doPrivileged(new PrivilegedSetTccl(ccl));

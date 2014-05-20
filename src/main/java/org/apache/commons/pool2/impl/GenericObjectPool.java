@@ -1097,8 +1097,7 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
      * {@link #_maxActive} objects created at any one time.
      */
     private final AtomicLong createCount = new AtomicLong(0);
-    private final LinkedBlockingDeque<PooledObject<T>> idleObjects =
-        new LinkedBlockingDeque<PooledObject<T>>();
+    private final LinkedBlockingDeque<PooledObject<T>> idleObjects = new LinkedBlockingDeque<PooledObject<T>>();
 
     // JMX specific attributes
     private static final String ONAME_BASE = "org.apache.commons.pool2:type=GenericObjectPool,name=";

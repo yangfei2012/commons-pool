@@ -572,8 +572,7 @@ public abstract class BaseGenericObjectPool<T> {
      *
      * @see #getEvictionPolicyClassName()
      */
-    public final void setEvictionPolicyClassName(
-            String evictionPolicyClassName) {
+    public final void setEvictionPolicyClassName(String evictionPolicyClassName) {
         try {
             Class<?> clazz = Class.forName(evictionPolicyClassName);
             Object policy = clazz.newInstance();
