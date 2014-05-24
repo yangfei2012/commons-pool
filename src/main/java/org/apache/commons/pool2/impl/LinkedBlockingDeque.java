@@ -147,8 +147,7 @@ class LinkedBlockingDeque<E> extends AbstractQueue<E>
     private final int capacity;
 
     /** Main lock guarding all access */
-    private final InterruptibleReentrantLock lock =
-            new InterruptibleReentrantLock();
+    private final InterruptibleReentrantLock lock = new InterruptibleReentrantLock();
 
     /** Condition for waiting takes */
     private final Condition notEmpty = lock.newCondition();

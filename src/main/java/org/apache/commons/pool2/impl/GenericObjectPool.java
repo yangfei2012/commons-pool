@@ -129,8 +129,8 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
      * @param abandonedConfig  Configuration for abandoned object identification
      *                         and removal.  The configuration is used by value.
      */
-    public GenericObjectPool(PooledObjectFactory<T> factory,
-            GenericObjectPoolConfig config, AbandonedConfig abandonedConfig) {
+    public GenericObjectPool(PooledObjectFactory<T> factory, GenericObjectPoolConfig config,
+                             AbandonedConfig abandonedConfig) {
         this(factory, config);
         setAbandonedConfig(abandonedConfig);
     }
@@ -402,16 +402,15 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
      *
      * @throws NoSuchElementException if an instance cannot be returned
      *
-     * @throws Exception if an object instance cannot be returned due to an
-     *                   error
+     * @throws Exception if an object instance cannot be returned due to an error
      */
     public T borrowObject(long borrowMaxWaitMillis) throws Exception {
         assertOpen();
 
         AbandonedConfig ac = this.abandonedConfig;
-        if (ac != null && ac.getRemoveAbandonedOnBorrow() &&
-                (getNumIdle() < 2) &&
-                (getNumActive() > getMaxTotal() - 3) ) {
+        if (ac != null && ac.getRemoveAbandonedOnBorrow()
+                && (getNumIdle() < 2)
+                && (getNumActive() > getMaxTotal()-3) ) {
             removeAbandoned(ac);
         }
 
@@ -437,14 +436,12 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
                         p = idleObjects.takeFirst();
                     } else {
                         waitTime = System.currentTimeMillis();
-                        p = idleObjects.pollFirst(borrowMaxWaitMillis,
-                                TimeUnit.MILLISECONDS);
+                        p = idleObjects.pollFirst(borrowMaxWaitMillis, TimeUnit.MILLISECONDS);
                         waitTime = System.currentTimeMillis() - waitTime;
                     }
                 }
                 if (p == null) {
-                    throw new NoSuchElementException(
-                            "Timeout waiting for idle object");
+                    throw new NoSuchElementException("Timeout waiting for idle object");
                 }
                 if (!p.allocate()) {
                     p = null;
@@ -474,8 +471,7 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
                     }
                     p = null;
                     if (create) {
-                        NoSuchElementException nsee = new NoSuchElementException(
-                                "Unable to activate object");
+                        NoSuchElementException nsee = new NoSuchElementException("Unable to activate object");
                         nsee.initCause(e);
                         throw nsee;
                     }
@@ -498,8 +494,7 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
                         }
                         p = null;
                         if (create) {
-                            NoSuchElementException nsee = new NoSuchElementException(
-                                    "Unable to validate object");
+                            NoSuchElementException nsee = new NoSuchElementException("Unable to validate object");
                             nsee.initCause(validationThrowable);
                             throw nsee;
                         }
@@ -964,15 +959,14 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
     private void removeAbandoned(AbandonedConfig ac) {
         // Generate a list of abandoned objects to remove
         final long now = System.currentTimeMillis();
-        final long timeout =
-                now - (ac.getRemoveAbandonedTimeout() * 1000L);
+        final long timeout = now - (ac.getRemoveAbandonedTimeout() * 1000L);
         ArrayList<PooledObject<T>> remove = new ArrayList<PooledObject<T>>();
         Iterator<PooledObject<T>> it = allObjects.values().iterator();
         while (it.hasNext()) {
             PooledObject<T> pooledObject = it.next();
             synchronized (pooledObject) {
-                if (pooledObject.getState() == PooledObjectState.ALLOCATED &&
-                        pooledObject.getLastUsedTime() <= timeout) {
+                if (pooledObject.getState()==PooledObjectState.ALLOCATED
+                        && pooledObject.getLastUsedTime()<=timeout) {
                     pooledObject.markAbandoned();
                     remove.add(pooledObject);
                 }
