@@ -25,9 +25,12 @@ import org.apache.commons.pool2.PooledObject;
  * <li>the object has been idle longer than
  *     {@link GenericObjectPool#getMinEvictableIdleTimeMillis()} /
  *     {@link GenericKeyedObjectPool#getMinEvictableIdleTimeMillis()}</li>
- * <li>there are more than {@link GenericObjectPool#getMinIdle()} /
- *     {@link GenericKeyedObjectPoolConfig#getMinIdlePerKey()} idle objects in
- *     the pool and the object has been idle for longer than
+ * <li>there are more than
+ *     {@link GenericObjectPool#getMinIdle()} /
+ *     {@link GenericKeyedObjectPoolConfig#getMinIdlePerKey()}
+ *     idle objects in the pool
+ *     and
+ *     the object has been idle for longer than
  *     {@link GenericObjectPool#getSoftMinEvictableIdleTimeMillis()} /
  *     {@link GenericKeyedObjectPool#getSoftMinEvictableIdleTimeMillis()}
  * </ul>
@@ -45,8 +48,7 @@ public class DefaultEvictionPolicy<T> implements EvictionPolicy<T> {
     public boolean evict(EvictionConfig config, PooledObject<T> underTest, int idleCount) {
 
         if ((config.getIdleSoftEvictTime()<underTest.getIdleTimeMillis() && config.getMinIdle()<idleCount)
-                ||
-                config.getIdleEvictTime()<underTest.getIdleTimeMillis()) {
+                || config.getIdleEvictTime()<underTest.getIdleTimeMillis()) {
             return true;
         }
         return false;

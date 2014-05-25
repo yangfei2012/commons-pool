@@ -17,7 +17,8 @@ public class ReaderUtil {
     }
 
     /**
-     * Dumps the contents of the {@link java.io.Reader} to a String, closing the {@link java.io.Reader} when done.
+     * Dumps the contents of the {@link java.io.Reader} to a String,
+     * closing the {@link java.io.Reader} when done.
      */
     public String readToString(Reader in) throws IOException {
         StringBuffer buf = null;

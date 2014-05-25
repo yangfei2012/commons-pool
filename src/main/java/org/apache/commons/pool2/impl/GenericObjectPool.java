@@ -382,10 +382,11 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
      * is thrown.
      * <p>
      * If the pool is exhausted (no available idle instances and no capacity to
-     * create new ones), this method will either block (if
-     * {@link #getBlockWhenExhausted()} is true) or throw a
-     * <code>NoSuchElementException</code> (if
-     * {@link #getBlockWhenExhausted()} is false). The length of time that this
+     * create new ones), this method will either block
+     * (if {@link #getBlockWhenExhausted()} is true) or
+     * throw a <code>NoSuchElementException</code>
+     * (if {@link #getBlockWhenExhausted()} is false).
+     * The length of time that this
      * method will block when {@link #getBlockWhenExhausted()} is true is
      * determined by the value passed in to the <code>borrowMaxWaitMillis</code>
      * parameter.
@@ -423,6 +424,7 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
         boolean create;
         long waitTime = 0;
 
+        // loop 直到创建出可用的object
         while (p == null) {
             create = false;
             if (blockWhenExhausted) {
@@ -460,6 +462,7 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
                 }
             }
 
+            // 创建object成功，进行激活，验证操作
             if (p != null) {
                 try {
                     factory.activateObject(p);
@@ -476,7 +479,8 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
                         throw nsee;
                     }
                 }
-                if (p != null && (getTestOnBorrow() || create && getTestOnCreate())) {
+                // 如果开启了test/validate相关的配置需求，则进行test/validate
+                if (p!=null && (getTestOnBorrow() || create && getTestOnCreate())) {
                     boolean validate = false;
                     Throwable validationThrowable = null;
                     try {
@@ -764,8 +768,7 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
                         continue;
                     }
 
-                    if (evictionPolicy.evict(evictionConfig, underTest,
-                            idleObjects.size())) {
+                    if (evictionPolicy.evict(evictionConfig, underTest, idleObjects.size())) {
                         destroy(underTest);
                         destroyedByEvictorCount.incrementAndGet();
                     } else {
@@ -801,7 +804,7 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
             }
         }
         AbandonedConfig ac = this.abandonedConfig;
-        if (ac != null && ac.getRemoveAbandonedOnMaintenance()) {
+        if (ac!=null && ac.getRemoveAbandonedOnMaintenance()) {
             removeAbandoned(ac);
         }
     }
@@ -881,7 +884,7 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
      * @throws Exception if the factory's makeObject throws
      */
     private void ensureIdle(int idleCount, boolean always) throws Exception {
-        if (idleCount < 1 || isClosed() || (!always && !idleObjects.hasTakeWaiters())) {
+        if (idleCount<1 || isClosed() || (!always && !idleObjects.hasTakeWaiters())) {
             return;
         }
 

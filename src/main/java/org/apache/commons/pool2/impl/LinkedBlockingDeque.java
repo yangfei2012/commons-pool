@@ -314,7 +314,7 @@ class LinkedBlockingDeque<E> extends AbstractQueue<E> implements Deque<E>, Seria
             x.item = null;
             // Don't mess with x's links.  They may still be in use by
             // an iterator.
-        --count;
+            --count;
             notFull.signal();
         }
     }
@@ -555,8 +555,7 @@ class LinkedBlockingDeque<E> extends AbstractQueue<E> implements Deque<E>, Seria
      * @return the unlinked element
      * @throws InterruptedException if the current thread is interrupted
      */
-    public E pollFirst(long timeout, TimeUnit unit)
-        throws InterruptedException {
+    public E pollFirst(long timeout, TimeUnit unit) throws InterruptedException {
         long nanos = unit.toNanos(timeout);
         lock.lockInterruptibly();
         try {
