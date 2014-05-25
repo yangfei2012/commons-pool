@@ -58,8 +58,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * @since 2.0
  */
-class LinkedBlockingDeque<E> extends AbstractQueue<E>
-        implements Deque<E>, Serializable {
+class LinkedBlockingDeque<E> extends AbstractQueue<E> implements Deque<E>, Serializable {
 
     /*
      * Implemented as a simple doubly-linked list protected by a

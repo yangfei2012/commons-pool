@@ -819,8 +819,8 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
     private PooledObject<T> create() throws Exception {
         int localMaxTotal = getMaxTotal();
         long newCreateCount = createCount.incrementAndGet();
-        if (localMaxTotal > -1 && newCreateCount > localMaxTotal ||
-                newCreateCount > Integer.MAX_VALUE) {
+        if (localMaxTotal>-1 && newCreateCount>localMaxTotal
+                || newCreateCount>Integer.MAX_VALUE) {
             createCount.decrementAndGet();
             return null;
         }

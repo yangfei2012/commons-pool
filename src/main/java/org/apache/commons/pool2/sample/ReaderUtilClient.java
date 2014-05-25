@@ -13,7 +13,8 @@ import java.io.StringReader;
 public class ReaderUtilClient {
 
     public static void main(String[] args) {
-        ReaderUtil readerUtil = new ReaderUtil(new GenericObjectPool<StringBuffer>(new StringBufferFactory()));
+        ReaderUtil readerUtil = new ReaderUtil(
+                new GenericObjectPool<StringBuffer>(new StringBufferFactory()));
         Reader reader = new StringReader("foo");
         try {
             System.out.println(readerUtil.readToString(reader));
