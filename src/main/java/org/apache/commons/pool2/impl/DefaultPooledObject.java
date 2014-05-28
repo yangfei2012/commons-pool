@@ -211,8 +211,8 @@ public class DefaultPooledObject<T> implements PooledObject<T> {
      */
     @Override
     public synchronized boolean deallocate() {
-        if (state == PooledObjectState.ALLOCATED ||
-                state == PooledObjectState.RETURNING) {
+        if (state==PooledObjectState.ALLOCATED ||
+                state==PooledObjectState.RETURNING) {
             state = PooledObjectState.IDLE;
             lastReturnTime = System.currentTimeMillis();
             if (borrowedBy != null) {
@@ -220,7 +220,6 @@ public class DefaultPooledObject<T> implements PooledObject<T> {
             }
             return true;
         }
-
         return false;
     }
 

@@ -532,8 +532,7 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
 
         if (!isAbandonedConfig()) {
             if (p == null) {
-                throw new IllegalStateException(
-                        "Returned object not currently part of this pool");
+                throw new IllegalStateException("Returned object not currently part of this pool");
             }
         } else {
             if (p == null) {
@@ -543,8 +542,7 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
                 synchronized(p) {
                     final PooledObjectState state = p.getState();
                     if (state != PooledObjectState.ALLOCATED) {
-                        throw new IllegalStateException(
-                                "Object has already been returned to this pool or is invalid");
+                        throw new IllegalStateException("Object has already been returned to this pool or is invalid");
                     } else {
                         p.markReturning(); // Keep from being marked abandoned
                     }
@@ -590,12 +588,11 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
         }
 
         if (!p.deallocate()) {
-            throw new IllegalStateException(
-                    "Object has already been returned to this pool or is invalid");
+            throw new IllegalStateException("Object has already been returned to this pool or is invalid");
         }
 
         int maxIdleSave = getMaxIdle();
-        if (isClosed() || maxIdleSave > -1 && maxIdleSave <= idleObjects.size()) {
+        if (isClosed() || maxIdleSave>-1 && maxIdleSave<=idleObjects.size()) {
             try {
                 destroy(p);
             } catch (Exception e) {
