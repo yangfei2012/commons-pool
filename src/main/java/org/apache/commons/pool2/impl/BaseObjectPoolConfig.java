@@ -151,14 +151,11 @@ public abstract class BaseObjectPoolConfig implements Cloneable {
 
     private long maxWaitMillis = DEFAULT_MAX_WAIT_MILLIS;
 
-    private long minEvictableIdleTimeMillis =
-        DEFAULT_MIN_EVICTABLE_IDLE_TIME_MILLIS;
+    private long minEvictableIdleTimeMillis = DEFAULT_MIN_EVICTABLE_IDLE_TIME_MILLIS;
 
-    private long softMinEvictableIdleTimeMillis =
-            DEFAULT_MIN_EVICTABLE_IDLE_TIME_MILLIS;
+    private long softMinEvictableIdleTimeMillis = DEFAULT_MIN_EVICTABLE_IDLE_TIME_MILLIS;
 
-    private int numTestsPerEvictionRun =
-        DEFAULT_NUM_TESTS_PER_EVICTION_RUN;
+    private int numTestsPerEvictionRun = DEFAULT_NUM_TESTS_PER_EVICTION_RUN;
 
     private String evictionPolicyClassName = DEFAULT_EVICTION_POLICY_CLASS_NAME;
 
@@ -170,8 +167,7 @@ public abstract class BaseObjectPoolConfig implements Cloneable {
 
     private boolean testWhileIdle = DEFAULT_TEST_WHILE_IDLE;
 
-    private long timeBetweenEvictionRunsMillis =
-        DEFAULT_TIME_BETWEEN_EVICTION_RUNS_MILLIS;
+    private long timeBetweenEvictionRunsMillis = DEFAULT_TIME_BETWEEN_EVICTION_RUNS_MILLIS;
 
     private boolean blockWhenExhausted = DEFAULT_BLOCK_WHEN_EXHAUSTED;
 
