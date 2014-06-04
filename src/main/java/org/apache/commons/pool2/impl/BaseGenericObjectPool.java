@@ -16,6 +16,10 @@
  */
 package org.apache.commons.pool2.impl;
 
+import org.apache.commons.pool2.PooledObject;
+import org.apache.commons.pool2.SwallowedExceptionListener;
+
+import javax.management.*;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -23,17 +27,6 @@ import java.lang.management.ManagementFactory;
 import java.util.Iterator;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicLong;
-
-import javax.management.InstanceAlreadyExistsException;
-import javax.management.InstanceNotFoundException;
-import javax.management.MBeanRegistrationException;
-import javax.management.MBeanServer;
-import javax.management.MalformedObjectNameException;
-import javax.management.NotCompliantMBeanException;
-import javax.management.ObjectName;
-
-import org.apache.commons.pool2.PooledObject;
-import org.apache.commons.pool2.SwallowedExceptionListener;
 
 /**
  * Base class that provides common functionality for {@link GenericObjectPool}
@@ -420,8 +413,7 @@ public abstract class BaseGenericObjectPool<T> {
      *
      * @see #getTimeBetweenEvictionRunsMillis
      */
-    public final void setTimeBetweenEvictionRunsMillis(
-            long timeBetweenEvictionRunsMillis) {
+    public final void setTimeBetweenEvictionRunsMillis(long timeBetweenEvictionRunsMillis) {
         this.timeBetweenEvictionRunsMillis = timeBetweenEvictionRunsMillis;
         startEvictor(timeBetweenEvictionRunsMillis);
     }

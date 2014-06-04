@@ -299,10 +299,8 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
         setTestWhileIdle(conf.getTestWhileIdle());
         setNumTestsPerEvictionRun(conf.getNumTestsPerEvictionRun());
         setMinEvictableIdleTimeMillis(conf.getMinEvictableIdleTimeMillis());
-        setTimeBetweenEvictionRunsMillis(
-                conf.getTimeBetweenEvictionRunsMillis());
-        setSoftMinEvictableIdleTimeMillis(
-                conf.getSoftMinEvictableIdleTimeMillis());
+        setTimeBetweenEvictionRunsMillis(conf.getTimeBetweenEvictionRunsMillis());
+        setSoftMinEvictableIdleTimeMillis(conf.getSoftMinEvictableIdleTimeMillis());
         setEvictionPolicyClassName(conf.getEvictionPolicyClassName());
     }
 
@@ -933,8 +931,9 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
         if (numTestsPerEvictionRun >= 0) {
             return Math.min(numTestsPerEvictionRun, idleObjects.size());
         } else {
-            return (int) (Math.ceil(idleObjects.size() /
-                    Math.abs((double) numTestsPerEvictionRun)));
+            return (int) (Math.ceil(
+                    idleObjects.size() / Math.abs((double) numTestsPerEvictionRun)
+            ));
         }
     }
 

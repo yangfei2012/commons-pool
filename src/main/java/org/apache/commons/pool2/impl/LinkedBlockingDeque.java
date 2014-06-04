@@ -17,11 +17,7 @@
 package org.apache.commons.pool2.impl;
 
 import java.io.Serializable;
-import java.util.AbstractQueue;
-import java.util.Collection;
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -561,7 +557,7 @@ class LinkedBlockingDeque<E> extends AbstractQueue<E> implements Deque<E>, Seria
         try {
             E x;
             while ( (x = unlinkFirst()) == null) {
-                if (nanos <= 0)
+                if (nanos <= 0) // 等待的时间已耗尽
                     return null;
                 nanos = notEmpty.awaitNanos(nanos);
             }
