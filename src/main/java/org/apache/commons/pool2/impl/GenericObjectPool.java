@@ -350,7 +350,7 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
      * Borrow an object from the pool using the specific waiting time which only
      * applies if {@link #getBlockWhenExhausted()} is true.
      * <p>
-     * If there is one or more idle instance available in the pool, then an
+     *   If there is one or more idle instance available in the pool, then an
      * idle instance will be selected based on the value of {@link #getLifo()},
      * activated and returned. If activation fails, or {@link #getTestOnBorrow()
      * testOnBorrow} is set to <code>true</code> and validation fails, the
@@ -358,28 +358,22 @@ public class GenericObjectPool<T> extends BaseGenericObjectPool<T>
      * continues until either a valid instance is returned or there are no more
      * idle instances available.
      * <p>
-     * If there are no idle instances available in the pool, behavior depends on
-     * the {@link #getMaxTotal() maxTotal}, (if applicable)
-     * {@link #getBlockWhenExhausted()} and the value passed in to the
-     * <code>borrowMaxWaitMillis</code> parameter. If the number of instances
-     * checked out from the pool is less than <code>maxTotal,</code> a new
-     * instance is created, activated and (if applicable) validated and returned
-     * to the caller. If validation fails, a <code>NoSuchElementException</code>
-     * is thrown.
+     *   If there are no idle instances available in the pool,
+     * behavior depends on the {@link #getMaxTotal() maxTotal},(if applicable) {@link #getBlockWhenExhausted()}
+     * and the value passed in to the <code>borrowMaxWaitMillis</code> parameter.
+     *   If the number of instances checked out from the pool is less than <code>maxTotal,</code>
+     * a new instance is created, activated and (if applicable) validated and returned to the caller.
+     *   If validation fails, a <code>NoSuchElementException</code> is thrown.
      * <p>
-     * If the pool is exhausted (no available idle instances and no capacity to
-     * create new ones), this method will either block
-     * (if {@link #getBlockWhenExhausted()} is true) or
-     * throw a <code>NoSuchElementException</code>
-     * (if {@link #getBlockWhenExhausted()} is false).
-     * The length of time that this
-     * method will block when {@link #getBlockWhenExhausted()} is true is
-     * determined by the value passed in to the <code>borrowMaxWaitMillis</code>
-     * parameter.
+     *   If the pool is exhausted (no available idle instances and no capacity to create new ones),
+     * this method will either block (if {@link #getBlockWhenExhausted()} is true) or
+     * throw a <code>NoSuchElementException</code> (if {@link #getBlockWhenExhausted()} is false).
+     *   The length of time that this method will block when {@link #getBlockWhenExhausted()} is true
+     * is determined by the value passed in to the <code>borrowMaxWaitMillis</code> parameter.
      * <p>
-     * When the pool is exhausted, multiple calling threads may be
-     * simultaneously blocked waiting for instances to become available. A
-     * "fairness" algorithm has been implemented to ensure that threads receive
+     *   When the pool is exhausted, multiple calling threads may be
+     * simultaneously blocked waiting for instances to become available.
+     *   A "fairness" algorithm has been implemented to ensure that threads receive
      * available instances in request arrival order.
      *
      * @param borrowMaxWaitMillis The time to wait in milliseconds for an object
