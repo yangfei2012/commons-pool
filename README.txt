@@ -31,6 +31,9 @@ up-to-date information on Apache Commons Pool.
         然后检测连接池对象数，若对象数<min_idle，则重新补充到min_idle
         （当连接池超的对象>max_total，不再进行补充)
 
+    当到30s进行扫描时，若在该时刻附近有对象被借出，则定时器会补充到20，
+    从而出现21的情况。。。这个21应该不是"pool有对象仍创建新对象的bug"
+
 
     numTestsPerEvictionRun
     每次进行驱除测试时,测试池中对象的数量：测试连接池所有的空闲对象
