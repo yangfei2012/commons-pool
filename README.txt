@@ -42,3 +42,9 @@ up-to-date information on Apache Commons Pool.
     若设置了removeAbandonedOnMaintenance，而且该对象的状态为ALLOCATED
     那么在这个对象超过removeAbandonedTimeout 将被删除
 
+
+    common pool2重写了LinkedBlockingDeque，作用是添加“Waiter”相关操作。
+    使得该blick deque更适合作为pool
+    （waiter：threads waiting to take instances from this deque）
+
+    而这里采用deque的原因是支持lifo(last in first out)等策略
